@@ -66,7 +66,7 @@
 
         <!-- FINGER LEFT -->
         
-        <joint name="${prefix}_finger_left_joint" type="revolute">
+        <joint name="${prefix}_left_finger_joint" type="revolute">
             <limit lower="-0.85" upper="0.47" effort="1.0" velocity="0.6"/>
             <axis xyz="0 0 1"/>
             <origin xyz="0.15505 0.01045 0" rpy="0.0 0.0 ${pi/4}" /> 
@@ -81,7 +81,7 @@
                 <mechanicalReduction>1</mechanicalReduction>
                 <motorTorqueConstant>1</motorTorqueConstant>
             </actuator>
-            <joint name="${prefix}_finger_left_joint" >
+            <joint name="${prefix}_left_finger_joint" >
                 <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             </joint>
         </transmission>
@@ -121,18 +121,18 @@
 
          <!-- THUMB LEFT -->
 
-        <joint name="${prefix}_thumb_left_joint" type="revolute">
+        <joint name="${prefix}_left_thumb_joint" type="revolute">
             <limit lower="-2.0" upper="2.0" effort="1.0" velocity="0.0125"/> 
             <axis xyz="0 0 1"/>
             <origin xyz="0.08 0 0" rpy="0.0 0.0 -${pi/4}" /> 
             <parent link="${prefix}_left_finger"/>
             <child link="${prefix}_left_thumb" />
             <dynamics friction="100" damping="100" />
-            <mimic joint="${prefix}_finger_left_joint" multiplier="-1.0" offset="0"/> 
+            <mimic joint="${prefix}_left_finger_joint" multiplier="-1.0" offset="0"/> 
         </joint>
         
-        <xacro:mimic_joint_plugin_gazebo parent_joint="${prefix}_finger_left_joint" 
-                                         mimic_joint="${prefix}_thumb_left_joint" has_pid="false" multiplier="-1.0" max_effort="10.0" />
+        <xacro:mimic_joint_plugin_gazebo parent_joint="${prefix}_left_finger_joint" 
+                                         mimic_joint="${prefix}_left_thumb_joint" has_pid="false" multiplier="-1.0" max_effort="10.0" />
 
         <link name="${prefix}_left_thumb">
             <inertial>
@@ -165,18 +165,18 @@
 
         <!-- FINGER RIGHT -->
 
-        <joint name="${prefix}_finger_right_joint" type="revolute">
+        <joint name="${prefix}_right_finger_joint" type="revolute">
             <limit lower="-0.85" upper="0.47" effort="1.0" velocity="0.6"/> 
             <axis xyz="0 0 1"/>
             <origin xyz="0.15505 -0.01045 0" rpy="0.0 0.0 -${pi/4}" /> 
             <parent link="${prefix}_base_link"/>
             <child link="${prefix}_right_finger" />
             <dynamics damping="0" friction="0"/>
-            <mimic joint="${prefix}_finger_left_joint" multiplier="-1.0" offset="0"/> 
+            <mimic joint="${prefix}_left_finger_joint" multiplier="-1.0" offset="0"/> 
         </joint>
 
-        <xacro:mimic_joint_plugin_gazebo parent_joint="${prefix}_finger_left_joint" 
-                                         mimic_joint="${prefix}_finger_right_joint" has_pid="false" multiplier="-1.0" max_effort="10.0" />
+        <xacro:mimic_joint_plugin_gazebo parent_joint="${prefix}_left_finger_joint" 
+                                         mimic_joint="${prefix}_right_finger_joint" has_pid="false" multiplier="-1.0" max_effort="10.0" />
 
         <link name="${prefix}_right_finger">
             <inertial>
@@ -214,18 +214,18 @@
 
          <!-- THUMB RIGHT -->
 
-        <joint name="${prefix}_thumb_right_joint" type="revolute">
+        <joint name="${prefix}_right_thumb_joint" type="revolute">
             <limit lower="-2.0" upper="2.0" effort="1.0" velocity="0.0125"/> 
             <axis xyz="0 0 1"/>
             <origin xyz="0.08 0 0" rpy="0.0 0.0 ${pi/4}" /> 
             <parent link="${prefix}_right_finger"/>
             <child link="${prefix}_right_thumb" />
             <dynamics friction="100" damping="100" />
-            <mimic joint="${prefix}_finger_right_joint" multiplier="-1.0" offset="0"/> 
+            <mimic joint="${prefix}_right_finger_joint" multiplier="-1.0" offset="0"/> 
         </joint>
         
-        <xacro:mimic_joint_plugin_gazebo parent_joint="${prefix}_finger_left_joint" 
-                                         mimic_joint="${prefix}_thumb_right_joint" has_pid="false" multiplier="1.0" max_effort="10.0" />
+        <xacro:mimic_joint_plugin_gazebo parent_joint="${prefix}_left_finger_joint" 
+                                         mimic_joint="${prefix}_right_thumb_joint" has_pid="false" multiplier="1.0" max_effort="10.0" />
 
         <link name="${prefix}_right_thumb">
             <inertial>
